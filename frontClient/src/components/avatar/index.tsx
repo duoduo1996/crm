@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import './index.less';
+import { request } from 'umi';
 
 const Avatar: React.FC = () => {
   const [isHovered, setIsHovered] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange =async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       setSelectedFile(file);
       // 在这里可以添加上传逻辑
+      const data= await request('/api/products');
+      console.log(data);
     }
   };
 
